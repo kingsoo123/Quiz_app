@@ -10,22 +10,42 @@ function App() {
       optionThree: " Kingsley",
       optionFour: "Amechi",
       answer: 'Amechi',
-      congrat: 'hello world',
+      congrat: '',
+      id:1
+    },
+
+    {
+      question: "Who is the vice president of Nigeria?",
+      optionOne: "kantara",
+      optionTwo: "omoyami",
+      optionThree: " stanley",
+      optionFour: "sanwolu",
+      answer: 'osibanjo',
+      congrat: '',
+      id:2
     }
   );
 
 
 
-  const correctAnswer = (val, e)=>{
+  const correctAnswer = (e, message)=>{
     e.preventDefault()
-    if(val === paper.answer){
-      setPaper({ ...paper, congrat:'correct answer!'})
-      console.log(paper.congrat);
+    if(e.target.firstChild.data === paper.answer){
+      setPaper({ ...paper, congrat: message})
+      console.log(paper.congrat, e.target.firstChild);
     }else{
-      console.log('no correct');
+      setPaper({
+        ...paper, congrat: message
+      })
+      console.log(message);
     }
       
   }
+
+
+  // const questionList = paper.map((val) =>{
+  //     return
+  // })
   return (
     <div className="container customCss pb-3">
       <nav className="navbar navbar-light justify-content-between">
@@ -50,19 +70,19 @@ function App() {
       </div>
       <h1 className="text-center mt-5">{paper.question}</h1>
       <div className="row d-flex justify-content-around p-3 mt-5">
-        <button className="btn btn-outline-primary col-md-4 ">
+        <button className="btn btn-outline-primary col-md-4 " onClick={(e)=>{correctAnswer(e, 'Olodo try again')}}>
          {paper.optionOne}
         </button>
-        <button className="btn btn-outline-warning col-md-4 mt-2">
+        <button className="btn btn-outline-warning col-md-4 mt-2" onClick={(e)=>{correctAnswer(e, 'How far na')}}>
           {paper.optionTwo}
         </button>
       </div>
 
       <div className="row d-flex justify-content-around p-3">
-        <button className="btn btn-outline-success col-md-4">
+        <button className="btn btn-outline-success col-md-4" onClick={(e)=>{correctAnswer(e, 'Nothing dey your head')}}>
           {paper.optionThree}
         </button>
-        <button className="btn btn-outline-danger col-md-4 mt-2" onClick={(e)=>{correctAnswer(paper.optionFour, e)}}>
+        <button className="btn btn-outline-danger col-md-4 mt-2" onClick={(e)=>{correctAnswer(e, 'Correct answer')}}>
         {paper.optionFour}
         </button>
       </div>
